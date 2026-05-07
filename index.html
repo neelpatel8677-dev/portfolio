@@ -23,32 +23,93 @@
             line-height: 1.6;
         }
 
-        nav {
+        /* ===== NAVBAR ===== */
+        .navbar {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: center;
-            height: 80px;
-            background-color: rgb(2, 2, 79);
+            padding: 15px 30px;
+            background-color: #000066;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
         }
 
-        nav ul {
-            display: flex;
-            justify-content: center;
+        .nav-logo {
+            color: #ffffff;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
 
-        nav ul li {
+        .nav-links {
             list-style: none;
-            margin: 0 23px;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
         }
 
-        nav ul li a {
+        .nav-links li a {
+            color: #ffffff;
             text-decoration: none;
-            color: white;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
 
-        nav ul li a:hover {
-            color: rgb(119, 119, 235);
-            font-size: 1.04rem;
+        .nav-links li a:hover {
+            color: #a855f7;
+            /* purple accent to match your site */
+        }
+
+        /* ===== HAMBURGER (Mobile) ===== */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: #ffffff;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* ===== MOBILE RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                gap: 0;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: #000066;
+                padding: 10px 0;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li a {
+                display: block;
+                padding: 12px 30px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                font-size: 1rem;
+            }
         }
 
         /* Avoid hover-based font resizing on touch devices */
@@ -83,11 +144,12 @@
 
         }
 
-.rightsection img {
+        .rightsection img {
             width: 100%;
             max-width: 520px;
             margin: 50px auto;
-            height: auto; /* avoid forcing a fixed height that can upscale and blur */
+            height: auto;
+            /* avoid forcing a fixed height that can upscale and blur */
             aspect-ratio: 4 / 3;
             object-fit: cover;
             object-position: center;
@@ -259,16 +321,43 @@
 
         /* Responsive Design */
         @media (max-width: 420px) {
-            .left { font-size: 1.15rem; }
-            .leftsection { font-size: 130%; margin: 20px 0; }
-            .firstsection { margin: 30px 0; }
-            .secondSection h1 { font-size: 1.3rem; }
-            .secondSection { max-width: 92vw; }
-            .service, .project { padding: 16px; }
-            .contact-details p { font-size: 0.95rem; }
+            .left {
+                font-size: 1.15rem;
+            }
 
-            nav ul li { margin: 8px 0; }
-            nav { padding: 12px 0; }
+            .leftsection {
+                font-size: 130%;
+                margin: 20px 0;
+            }
+
+            .firstsection {
+                margin: 30px 0;
+            }
+
+            .secondSection h1 {
+                font-size: 1.3rem;
+            }
+
+            .secondSection {
+                max-width: 92vw;
+            }
+
+            .service,
+            .project {
+                padding: 16px;
+            }
+
+            .contact-details p {
+                font-size: 0.95rem;
+            }
+
+            nav ul li {
+                margin: 8px 0;
+            }
+
+            nav {
+                padding: 12px 0;
+            }
         }
 
         @media (max-width: 768px) {
@@ -293,7 +382,7 @@
                 margin: 50px 0;
             }
 
-            .firstsection > div {
+            .firstsection>div {
                 width: 100%;
             }
 
@@ -338,7 +427,7 @@
         }
 
         @media (min-width: 769px) and (max-width: 1024px) {
-            .firstsection > div {
+            .firstsection>div {
                 width: 45%;
             }
 
@@ -353,7 +442,7 @@
         }
 
         @media (min-width: 1025px) {
-            .firstsection > div {
+            .firstsection>div {
                 width: 30%;
             }
 
@@ -367,17 +456,20 @@
 
 <body>
     <header>
-        <nav>
-            <div class="left">Neel's portfolio</div>
-            <div class="right">
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">services</a></li>
-                    <li><a href="#contact">contact Me</a></li>
-                    <li><a href="#projects">projects</a></li>
-                </ul>
+        <nav class="navbar">
+            <div class="nav-logo">Neel's portfolio</div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact Me</a></li>
+                <li><a href="#projects">Projects</a></li>
+            </ul>
         </nav>
     </header>
     <main>
@@ -395,7 +487,8 @@
 
         <section id="about" class="secondSection">
             <h1>About Me</h1>
-            <p>I am a passionate Full Stack web developer with a keen interest in creating dynamic and user-friendly websites. With
+            <p>I am a passionate Full Stack web developer with a keen interest in creating dynamic and user-friendly
+                websites. With
                 experience in HTML, CSS, JavaScript, and various frameworks, I strive to build innovative solutions that
                 meet client needs.</p>
         </section>
@@ -427,7 +520,7 @@
                     <p>A personal portfolio showcasing my skills and projects.</p>
                     <a href="#" target="_blank">View Project</a>
                 </div>
-                
+
 
             </div>
         </section>
@@ -450,4 +543,3 @@
 </body>
 
 </html>
-
